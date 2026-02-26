@@ -1,16 +1,9 @@
-    """
-    Task 1
-    - Create a function that would swap the value of x and y using only x and y as variables.
-    - x and y must be numeric.
-    - Return -1 if x and y is not numeric, and
-    - print the swapped values if both x and y are numeric.
-    """
-
-from numbers import Number
-
 def swap(x, y):
+    
+    if isinstance(x, bool) or isinstance(y, bool):
+        return -1
 
-    if not isinstance(x, Number) or not isinstance(y, Number):
+    if not isinstance(x, (int, float)) or not isinstance(y, (int, float)):
         return -1
 
     x = x + y
@@ -18,3 +11,25 @@ def swap(x, y):
     x = x - y
 
     print(x, y)
+    return x, y
+
+
+if __name__ == "__main__":
+    try:
+        x = float(input("Enter x: "))
+        y = float(input("Enter y: "))
+    except ValueError:
+        print(-1)
+    else:
+        result = swap(x, y)
+        if result == -1:
+            print(-1)
+
+
+    """
+    Task 1
+    - Create a function that would swap the value of x and y using only x and y as variables.
+    - x and y must be numeric.
+    - Return -1 if x and y is not numeric, and
+    - print the swapped values if both x and y are numeric.
+    """
