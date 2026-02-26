@@ -1,0 +1,39 @@
+def update_dictionary(dct, key, value):
+    """
+    Task 1
+    - Create a function that updates a dictionary (dct) with a new key-value pair.
+    - If the key already exists in dct, print the original value, then update its value.
+    - Return the updated dictionary.
+    """
+    if not isinstance(dct, dict):
+        return -1
+
+    if key in dct:
+        print(dct[key])
+
+    dct[key] = value
+    return dct
+
+
+if __name__ == "__main__":
+    profile = {
+        "name": "Alice",
+        "age": 25,
+    }
+
+    print("Current dictionary entries:")
+    print({"name": profile["name"]})
+    print({"age": profile["age"]})
+
+    name = input("Enter name to update: ").strip()
+    age_input = input("Enter age to update: ").strip()
+
+    try:
+        age = int(age_input)
+    except ValueError:
+        print(-1)
+    else:
+        update_dictionary(profile, "name", name)
+        update_dictionary(profile, "age", age)
+        print({"name": profile["name"]})
+        print({"age": profile["age"]})
