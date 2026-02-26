@@ -1,0 +1,44 @@
+class Car:
+    """
+    - Define a class named Car with attributes: make, model, year
+    - Initialize these attributes in the __init__ method
+    """
+
+    def __init__(self, make, model, year):
+        self.make = make
+        self.model = model
+        self.year = year
+
+    def describe_car(self):
+        """
+        - Add a method named describe_car() that prints information about the car as "Year Make Model"
+        """
+        print(f"{self.year} {self.make} {self.model}")
+
+
+def parse_car_input(user_input):
+    """Parse user input formatted as: make model year."""
+    parts = user_input.strip().split()
+
+    if len(parts) != 3:
+        return None
+
+    make, model, year_text = parts
+
+    try:
+        year = int(year_text)
+    except ValueError:
+        return None
+
+    return Car(make, model, year)
+
+
+if __name__ == "__main__":
+    raw_input_text = input("Enter car details as 'Make Model Year': ")
+    car = parse_car_input(raw_input_text)
+
+    if car is None:
+        print(-1)
+    else:
+        print(f"Make: {car.make}, Model: {car.model}, Year: {car.year}")
+        car.describe_car()
