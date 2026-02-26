@@ -1,0 +1,54 @@
+def find_and_replace(lst, find_val, replace_val):
+    """
+    Task 1
+    - Create a function that searches for all occurrences of a value (find_val) in a given list (lst) and replaces them with another value (replace_val).
+    - lst must be a list.
+    - Return the modified list.
+    """
+    if not isinstance(lst, list):
+        return -1
+
+    for index, value in enumerate(lst):
+        if value == find_val:
+            lst[index] = replace_val
+
+    return lst
+
+
+def get_user_value(prompt, expect_numeric):
+    """Read user input and convert based on selected list type."""
+    value = input(prompt).strip()
+
+    if expect_numeric:
+        try:
+            return int(value)
+        except ValueError:
+            return None
+
+    return value
+
+
+if __name__ == "__main__":
+    list_options = {
+        "1": [1, 2, 3, 4, 2, 2],
+        "2": ["apple", "banana", "apple"],
+    }
+
+    print("Choose a list to run find_and_replace:")
+    print("1: [1, 2, 3, 4, 2, 2]")
+    print('2: ["apple", "banana", "apple"]')
+    choice = input("Enter option (1 or 2): ").strip()
+
+    if choice not in list_options:
+        print(-1)
+    else:
+        selected_list = list_options[choice][:]
+        expect_numeric = choice == "1"
+
+        find_val = get_user_value("Enter the item which you want to replace: ", expect_numeric)
+        replace_val = get_user_value("Enter what you want it to be replaced with: ", expect_numeric)
+
+        if find_val is None or replace_val is None:
+            print(-1)
+        else:
+            print(find_and_replace(selected_list, find_val, replace_val))
