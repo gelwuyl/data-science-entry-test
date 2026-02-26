@@ -1,35 +1,54 @@
 def swap(x, y):
-    
+    """
+    Task 1
+    - Create a function that would swap the value of x and y using only x and y as variables.
+    - x and y can be numeric values or alphabetic strings.
+    - Return -1 if x and y are invalid, and
+    - print the swapped values if both x and y are valid.
+    """
     if isinstance(x, bool) or isinstance(y, bool):
         return -1
 
-    if not isinstance(x, (int, float)) or not isinstance(y, (int, float)):
-        return -1
+    both_numeric = isinstance(x, (int, float)) and isinstance(y, (int, float))
+    both_alpha = isinstance(x, str) and isinstance(y, str) and x.isalpha() and y.isalpha()
 
-    x = x + y
-    y = x - y
-    x = x - y
+    if both_numeric:
+        x = x + y
+        y = x - y
+        x = x - y
+    elif both_alpha:
+        x, y = y, x
+    else:
+        return -1
 
     print(x, y)
     return x, y
 
 
-if __name__ == "__main__":
+def parse_input(value):
+    """Parse user input into number or alphabetic string."""
+    if value.isalpha():
+        return value
+
     try:
-        x = float(input("Enter x: "))
-        y = float(input("Enter y: "))
+        return int(value)
     except ValueError:
+        try:
+            return float(value)
+        except ValueError:
+            return None
+
+
+if __name__ == "__main__":
+    raw_x = input("Enter x: ").strip()
+    raw_y = input("Enter y: ").strip()
+
+    x = parse_input(raw_x)
+    y = parse_input(raw_y)
+
+    if x is None or y is None:
         print(-1)
     else:
         result = swap(x, y)
         if result == -1:
             print(-1)
-
-
-    """
-    Task 1
-    - Create a function that would swap the value of x and y using only x and y as variables.
-    - x and y must be numeric.
-    - Return -1 if x and y is not numeric, and
-    - print the swapped values if both x and y are numeric.
-    """
