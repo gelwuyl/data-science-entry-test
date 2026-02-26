@@ -1,0 +1,41 @@
+def check_divisibility(num, divisor):
+    """
+    Task 1
+    - Create a function to check if the number (num) is divisible by another number (divisor).
+    - Both num and divisor must be numeric.
+    - Return True if num is divisible by divisor, False otherwise.
+    """
+    if not isinstance(num, (int, float)) or isinstance(num, bool):
+        return False
+
+    if not isinstance(divisor, (int, float)) or isinstance(divisor, bool):
+        return False
+
+    if divisor == 0:
+        return False
+
+    return num % divisor == 0
+
+
+def parse_numeric(value):
+    """Parse user input into int or float."""
+    try:
+        return int(value)
+    except ValueError:
+        try:
+            return float(value)
+        except ValueError:
+            return None
+
+
+if __name__ == "__main__":
+    raw_num = input("Enter num: ").strip()
+    raw_divisor = input("Enter divisor: ").strip()
+
+    num = parse_numeric(raw_num)
+    divisor = parse_numeric(raw_divisor)
+
+    if num is None or divisor is None:
+        print(-1)
+    else:
+        print(check_divisibility(num, divisor))
