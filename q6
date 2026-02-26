@@ -1,0 +1,52 @@
+def find_first_negative(lst):
+    """
+    Task 1
+    - Create a function that finds the first negative number in a list (lst).
+    - Return the first negative number if found, otherwise return "No negatives".
+    - Use a while loop to implement this.
+    """
+    if not isinstance(lst, list):
+        return -1
+
+    index = 0
+    while index < len(lst):
+        value = lst[index]
+        if value < 0:
+            return value
+        index += 1
+
+    return "No negatives"
+
+
+def parse_number_list(raw_input):
+    """Convert comma-separated user input into a list of numbers."""
+    if not raw_input.strip():
+        return None
+
+    parts = [item.strip() for item in raw_input.split(",")]
+    numbers = []
+
+    for part in parts:
+        if not part:
+            return None
+        try:
+            number = float(part)
+        except ValueError:
+            return None
+
+        if number.is_integer():
+            numbers.append(int(number))
+        else:
+            numbers.append(number)
+
+    return numbers
+
+
+if __name__ == "__main__":
+    user_numbers = input("Enter numbers separated by commas: ")
+    lst = parse_number_list(user_numbers)
+
+    if lst is None:
+        print(-1)
+    else:
+        print(find_first_negative(lst))
